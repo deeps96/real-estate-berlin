@@ -1,3 +1,4 @@
+from re import search
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
@@ -36,11 +37,11 @@ class Degewo(Crawler):
             ],
             link=link,
             rent={
-                'price': int(browser.page.find('div', class_='expose__price-tag').next.replace('\n', '').split(',', 1)[0]),
+                'price': int(search('\d+', browser.page.find('div', class_='expose__price-tag').next).group()),
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Zimmer'),
-            size=int(extract_information_from_table(browser.page, 'Wohnfläche').split(',', 1)[0]),
+            size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche')).group()),
             title=browser.page.title.text
         )
 

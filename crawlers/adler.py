@@ -1,3 +1,4 @@
+from re import search
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
@@ -39,11 +40,11 @@ class Adler(Crawler):
             ],
             link=link,
             rent={
-                'price': int(extract_information_from_table(browser.page, 'Warmmiete')[:-3]),
+                'price': int(search('\d+', extract_information_from_table(browser.page, 'Warmmiete')).group()),
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Anzahl Zimmer')[1:-len(' Zimmer ')],
-            size=int(extract_information_from_table(browser.page, 'Wohnfläche')[1:-len(' qm ')]),
+            size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche')).group()),
             title=browser.page.title.text
         )
 

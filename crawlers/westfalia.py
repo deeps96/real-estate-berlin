@@ -1,5 +1,5 @@
+from re import search
 from typing import List, Dict, Any
-from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
@@ -36,11 +36,11 @@ class Westfalia(Crawler):
             ],
             link=link,
             rent={
-                'price': int(extract_information_from_table(browser.page, 'Warmmiete:').split(',', 1)[0].replace('.', '')),
+                'price': int(search('\d+', extract_information_from_table(browser.page, 'Warmmiete:')).group()),
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Zimmer:'),
-            size=int(extract_information_from_table(browser.page, 'Wohnfläche:').split('.', 1)[0]),
+            size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche:')).group()),
             title=browser.page.title.text
         )
 

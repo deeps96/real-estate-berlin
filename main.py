@@ -51,12 +51,10 @@ if __name__ == '__main__':
             ]
             if new_offers:
                 print(f'Found {len(new_offers)} new offers')
-                print(Counter(offer['crawler'] for offer in new_offers))
                 offer_storage.add_offers(new_offers)
                 for new_offer in new_offers:
                     if is_interesting_offer(new_offer):
                         bot.send_offer(user_id, new_offer)
-    except KeyboardInterrupt:
-        bot.stop()
     finally:
+        bot.stop()
         bot.send_shutdown_notice(user_id)

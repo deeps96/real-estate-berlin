@@ -46,14 +46,14 @@ class TelegramBot:
                 photo=offer.images[0],
                 caption=offer.generate_offer_message(),
                 parse_mode=ParseMode.HTML,
-                reply_markup=offer.get_reply_markup()
+                reply_markup=get_reply_markup(offer)
             )
         else:
             self.bot.send_message(
                 chat_id=chat_id,
                 text=offer.generate_offer_message(),
                 parse_mode=ParseMode.HTML,
-                reply_markup=offer.get_reply_markup()
+                reply_markup=get_reply_markup(offer)
             )
 
     def send_stats(self, chat_id: str,  stats: Counter):

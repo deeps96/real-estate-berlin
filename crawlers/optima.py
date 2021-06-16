@@ -1,3 +1,4 @@
+from re import search
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
@@ -36,11 +37,11 @@ class Optima(Crawler):
             ],
             link=link,
             rent={
-                'price': int(extract_information_from_table(browser.page, 'Gesamtmiete').split(',', 1)[0]),
+                'price': int(search('\d+', extract_information_from_table(browser.page, 'Gesamtmiete')).group()),
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Zimmeranzahl'),
-            size=int(extract_information_from_table(browser.page, 'Wohnfläche').split(',', 1)[0]),
+            size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche')).group()),
             title=browser.page.title.text
         )
 

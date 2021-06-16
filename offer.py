@@ -1,6 +1,6 @@
-import re
 from dataclasses import dataclass
 from hashlib import md5
+from re import search
 from typing import List, Any, Dict, Optional
 
 from prettytable import PrettyTable
@@ -26,7 +26,7 @@ class Offer(BaseOffer):
 
     def __post_init__(self):
         self.id = md5(self.link.encode()).hexdigest()
-        zip_regex_match = re.search('\d{5}', self.address)
+        zip_regex_match = search('\d{5}', self.address)
         self.zip = zip_regex_match and zip_regex_match.group()
 
     def get_meta_table(self) -> PrettyTable:
@@ -63,7 +63,7 @@ class Offer(BaseOffer):
 
     def generate_offer_message(self) -> str:
         return f'''
-<b>{self.title[:width_in_characters]}</b>
+<b>{self.title}</b>
 <pre>{self.get_meta_table().get_string()}</pre>'''
 
     def generate_email_body(self) -> str:

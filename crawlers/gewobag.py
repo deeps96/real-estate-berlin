@@ -1,3 +1,4 @@
+from re import search
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
@@ -36,11 +37,11 @@ class Gewobag(Crawler):
             ],
             link=link,
             rent={
-                'price': int(extract_information_from_li_div(browser.page, 'Gesamtmiete').split(',', 1)[0]),
+                'price': int(search('\d+', extract_information_from_li_div(browser.page, 'Gesamtmiete')).group()),
                 'total': True
             },
             rooms=extract_information_from_li_div(browser.page, 'Anzahl Zimmer'),
-            size=int(extract_information_from_li_div(browser.page, 'Fläche in m²').split(',', 1)[0]),
+            size=int(search('\d+', extract_information_from_li_div(browser.page, 'Fläche in m²')).group()),
             title=browser.page.title.text
         )
 

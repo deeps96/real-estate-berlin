@@ -1,3 +1,4 @@
+from re import search
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
@@ -36,11 +37,11 @@ class StadtUndLand(Crawler):
             ],
             link=link,
             rent={
-                'price': extract_information_from_table(browser.page, 'Warmmiete'),
+                'price': int(search('\d+', extract_information_from_table(browser.page, 'Warmmiete')).group()),
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Anzahl der Zimmer'),
-            size=int(extract_information_from_table(browser.page, 'Wohnfläche / Nutzfläche').split('.', 1)[0]),
+            size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche / Nutzfläche')).group()),
             title=browser.page.title.text
         )
 

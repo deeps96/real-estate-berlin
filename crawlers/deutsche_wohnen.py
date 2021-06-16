@@ -33,7 +33,7 @@ class DeutscheWohnen(Crawler):
 
     def get_offer(self, offer: Dict[str, Any]) -> Offer:
         return Offer(
-            address=f"{offer['street']} {offer['houseNumber']}, {offer['zip']} {offer['city']}",
+            address=f"{offer['address']['street']} {offer['address']['houseNumber']}, {offer['address']['zip']} {offer['address']['city']}",
             email=None,
             images=[
                 urljoin('https://www.deutsche-wohnen.com/', image['filePath'])
