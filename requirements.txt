@@ -1,0 +1,6 @@
+beautifulsoup4==4.9.3
+googlemaps==4.4.5
+MechanicalSoup==1.1.0
+prettytable==2.1.0
+python-telegram-bot==13.6
+requests==2.25.1
