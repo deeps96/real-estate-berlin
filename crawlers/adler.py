@@ -18,7 +18,8 @@ class Adler(Crawler):
         return [
             {
                 'fetch': lambda: self.get_offer(urljoin(OFFER_LIST, link['href'])),
-                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href']))
+                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
+                'crawler': 'Adler'
             }
             for link in browser.page.select('.object-headline > a')
         ]

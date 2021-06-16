@@ -1,3 +1,4 @@
+from collections import Counter
 from time import sleep
 from typing import List, Dict, Any
 
@@ -18,6 +19,7 @@ CRAWLERS = [Howoge(), Gewobag(), Degewo(), Optima(), DeutscheWohnen(), StadtUndL
 
 
 def fetch_offers() -> List[Dict[str, Any]]:
+    print('Fetching...')
     return [
         offer
         for crawler in CRAWLERS
@@ -30,12 +32,15 @@ def is_interesting_offer(offer: Offer) -> bool:
 
 
 if __name__ == '__main__':
+    offers = fetch_offers()
     offer_storage = OfferStorage([
         offer['offer']
-        for offer in fetch_offers()
+        for offer in offers
     ])
     print(f'Found {str(offer_storage.get_size())} offers.')
     bot = TelegramBot(offer_storage)
+    stats = Counter(offer['crawler'] for offer in offers)
+    bot.send_stats(user_id, stats)
     try:
         while True:
             sleep(interval_in_seconds)
@@ -46,9 +51,12 @@ if __name__ == '__main__':
             ]
             if new_offers:
                 print(f'Found {len(new_offers)} new offers')
-            offer_storage.add_offers(new_offers)
-            for new_offer in new_offers:
-                if is_interesting_offer(new_offer):
-                    bot.send_offer(user_id, new_offer)
+                print(Counter(offer['crawler'] for offer in new_offers))
+                offer_storage.add_offers(new_offers)
+                for new_offer in new_offers:
+                    if is_interesting_offer(new_offer):
+                        bot.send_offer(user_id, new_offer)
     except KeyboardInterrupt:
         bot.stop()
+    finally:
+        bot.send_shutdown_notice(user_id)

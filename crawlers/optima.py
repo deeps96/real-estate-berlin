@@ -18,7 +18,8 @@ class Optima(Crawler):
         return [
             {
                 'fetch': lambda: self.get_offer(urljoin(OFFER_LIST, link['href'])),
-                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href']))
+                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
+                'crawler': 'Optima'
             }
             for link in browser.links(link_text='Alle Objektdetails')
         ]

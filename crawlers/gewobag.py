@@ -18,7 +18,8 @@ class Gewobag(Crawler):
         return [
             {
                 'fetch': lambda: self.get_offer(urljoin(OFFER_LIST, link['href'])),
-                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href']))
+                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
+                'crawler': 'Gewobag'
             }
             for link in browser.page.find('div', class_='filtered-elements').find_all('a', text='Mietangebot ansehen')
         ]

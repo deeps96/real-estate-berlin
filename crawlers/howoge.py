@@ -26,7 +26,8 @@ class Howoge(Crawler):
         return [
             {
                 'fetch': lambda: self.get_offer(offer),
-                'offer': BaseOffer(link=urljoin(BASE_URL, offer['link']))
+                'offer': BaseOffer(link=urljoin(BASE_URL, offer['link'])),
+                'crawler': 'Howoge'
             }
             for offer in response.json()['immoobjects']
         ]

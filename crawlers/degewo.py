@@ -18,7 +18,8 @@ class Degewo(Crawler):
         return [
             {
                 'fetch': lambda: self.get_offer(urljoin(OFFER_LIST, link['href'])),
-                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href']))
+                'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
+                'crawler': 'Degewo'
             }
             for link in browser.page.select('article > a')
         ]

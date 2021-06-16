@@ -1,10 +1,12 @@
+from collections import Counter
 from typing import List
 
+from prettytable import PrettyTable
 from telegram import Bot, Update, ParseMode, ForceReply, CallbackQuery, InputMediaPhoto, InlineKeyboardButton, \
     InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, CallbackContext
 
-from config import telegram_bot
+from config import telegram_bot, width_in_characters
 from gmaps import GMaps
 from offer import Offer
 from offer_storage import OfferStorage
@@ -53,6 +55,20 @@ class TelegramBot:
                 parse_mode=ParseMode.HTML,
                 reply_markup=offer.get_reply_markup()
             )
+
+    def send_stats(self, chat_id: str,  stats: Counter):
+        self.bot.send_message(
+            chat_id=chat_id,
+            text=f"<b>Initial stats</b><pre>\n</pre><pre>{get_stats_table(stats).get_string()}</pre>",
+            parse_mode=ParseMode.HTML
+        )
+
+    def send_shutdown_notice(self, chat_id: str):
+        self.bot.send_message(
+            chat_id=chat_id,
+            text='Bot got shutdown.',
+            parse_mode=ParseMode.HTML
+        )
 
     def stop(self):
         self.updater.stop()
@@ -151,3 +167,16 @@ handlers = {
     'travelTimes': travel_time_handler
 }
 
+
+def get_stats_table(stats: Counter) -> PrettyTable:
+    stats_table = PrettyTable(
+        field_names=['Crawler', 'Count'],
+        header=False,
+        min_table_width=width_in_characters,
+        border=False,
+        padding_width=0
+    )
+    stats_table.align['Crawler'] = 'l'
+    stats_table.align['Count'] = 'r'
+    stats_table.add_rows(stats.items())
+    return stats_table

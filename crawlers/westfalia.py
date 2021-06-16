@@ -18,7 +18,8 @@ class Westfalia(Crawler):
         return [
             {
                 'fetch': lambda: self.get_offer(link['href']),
-                'offer': BaseOffer(link=link['href'])
+                'offer': BaseOffer(link=link['href']),
+                'crawler': 'Westfalia'
             }
             for link in browser.page.select("a[title='Zur Immobilie']")
         ]
