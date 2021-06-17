@@ -8,6 +8,7 @@ from crawlers.degewo import Degewo
 from crawlers.deutsche_wohnen import DeutscheWohnen
 from crawlers.gewobag import Gewobag
 from crawlers.howoge import Howoge
+from crawlers.milia import Milia
 from crawlers.optima import Optima
 from crawlers.stadt_und_land import StadtUndLand
 from crawlers.westfalia import Westfalia
@@ -15,7 +16,7 @@ from offer import Offer
 from offer_storage import OfferStorage
 from telegram_bot import TelegramBot
 
-CRAWLERS = [Howoge(), Gewobag(), Degewo(), Optima(), DeutscheWohnen(), StadtUndLand(), Adler(), Westfalia()]
+CRAWLERS = [Howoge(), Gewobag(), Degewo(), Optima(), DeutscheWohnen(), StadtUndLand(), Adler(), Westfalia(), Milia()]
 
 
 def fetch_offers() -> List[Dict[str, Any]]:
@@ -53,7 +54,8 @@ if __name__ == '__main__':
                     continue
                 try:
                     new_offers.append(offer['fetch']())
-                except:
+                except Exception as e:
+                    bot.send_error_message(user_id, str(e))
                     offer_storage.add_offers(offer['offer'])
             if new_offers:
                 print(f'Found {len(new_offers)} new offers')
