@@ -1,7 +1,6 @@
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
 from requests import post
 
 from base_offer import BaseOffer
@@ -25,7 +24,7 @@ class Howoge(Crawler):
         })
         return [
             {
-                'fetch': lambda: self.get_offer(offer),
+                'fetch': lambda offer=offer: self.get_offer(offer),
                 'offer': BaseOffer(link=urljoin(BASE_URL, offer['link'])),
                 'crawler': 'Howoge'
             }

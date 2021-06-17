@@ -17,7 +17,7 @@ class Westfalia(Crawler):
         browser.open(OFFER_LIST)
         return [
             {
-                'fetch': lambda: self.get_offer(link['href']),
+                'fetch': lambda absolute_link=link['href']: self.get_offer(absolute_link),
                 'offer': BaseOffer(link=link['href']),
                 'crawler': 'Westfalia'
             }

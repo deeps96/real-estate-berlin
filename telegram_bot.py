@@ -73,7 +73,7 @@ class TelegramBot:
     def send_error_message(self, chat_id: str, error_message: str):
         self.bot.send_message(
             chat_id=chat_id,
-            text=f"<code>{error_message}</code>",
+            text=f"An error occurred: <code>{error_message}</code>",
             parse_mode=ParseMode.HTML
         )
 

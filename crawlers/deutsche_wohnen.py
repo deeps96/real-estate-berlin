@@ -24,7 +24,7 @@ class DeutscheWohnen(Crawler):
         })
         return [
             {
-                'fetch': lambda: self.get_offer(offer),
+                'fetch': lambda offer=offer: self.get_offer(offer),
                 'offer': BaseOffer(link=f"https://www.deutsche-wohnen.com/expose/object/{offer['id']}"),
                 'crawler': 'Deutsche Wohnen'
             }

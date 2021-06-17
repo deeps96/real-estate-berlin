@@ -25,8 +25,8 @@ def fetch_offers() -> List[Dict[str, Any]]:
     for crawler in CRAWLERS:
         try:
             offers.extend(crawler.get_offer_link_list())
-        except:
-            pass
+        except Exception as e:
+            print(e)
     return offers
 
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
                     new_offers.append(offer['fetch']())
                 except Exception as e:
                     bot.send_error_message(user_id, str(e))
-                    offer_storage.add_offers(offer['offer'])
+                    offer_storage.add_offer(offer['offer'])
             if new_offers:
                 print(f'Found {len(new_offers)} new offers')
                 offer_storage.add_offers(new_offers)
