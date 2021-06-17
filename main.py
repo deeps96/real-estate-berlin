@@ -38,11 +38,11 @@ if __name__ == '__main__':
     offer_storage = OfferStorage()
     bot = TelegramBot(offer_storage)
     offers = fetch_offers()
-    print(f'Found {str(offer_storage.get_size())} offers.')
     offer_storage.add_offers([
         offer['offer']
         for offer in offers
     ])
+    print(f'Found {str(offer_storage.get_size())} offers.')
     stats = Counter(offer['crawler'] for offer in offers)
     bot.send_stats(user_id, stats)
     try:
