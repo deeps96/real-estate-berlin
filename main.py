@@ -6,6 +6,7 @@ from config import user_id, interval_in_seconds
 from crawlers.adler import Adler
 from crawlers.degewo import Degewo
 from crawlers.deutsche_wohnen import DeutscheWohnen
+from crawlers.foelske import Foelske
 from crawlers.gewobag import Gewobag
 from crawlers.howoge import Howoge
 from crawlers.milia import Milia
@@ -16,7 +17,18 @@ from offer import Offer
 from offer_storage import OfferStorage
 from telegram_bot import TelegramBot
 
-CRAWLERS = [Howoge(), Gewobag(), Degewo(), Optima(), DeutscheWohnen(), StadtUndLand(), Adler(), Westfalia(), Milia()]
+CRAWLERS = [
+    Howoge(),
+    Gewobag(),
+    Degewo(),
+    Optima(),
+    DeutscheWohnen(),
+    StadtUndLand(),
+    Adler(),
+    Westfalia(),
+    Milia(),
+    Foelske()
+]
 
 
 def fetch_offers() -> List[Dict[str, Any]]:
