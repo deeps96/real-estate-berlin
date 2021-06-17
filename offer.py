@@ -23,6 +23,7 @@ class Offer(BaseOffer):
     travel_times: Optional[List[TravelTime]] = None
     id: str = None
     zip: str = None
+    is_complete: bool = True
 
     def __post_init__(self):
         self.id = md5(self.link.encode()).hexdigest()

@@ -29,13 +29,13 @@ class TelegramBot:
         if not data:
             return
         offer_id = data[0]
-        if self.offer_storage.has_offer(offer_id):
+        if self.offer_storage.has_offer(offer_id) and self.offer_storage.get_offer(offer_id).is_complete:
             offer = self.offer_storage.get_offer(offer_id)
             callback_type = data[1]
             handlers[callback_type](update, query, data[2:], offer)
         else:
             query.edit_message_text(
-                text='<b>Offer not found!</b>',
+                text='<b>Offer not loaded!</b>',
                 parse_mode=ParseMode.HTML
             )
 

@@ -6,3 +6,4 @@ class BaseOffer:
     def __init__(self, link: str):
         self.link = link
         self.id = md5(self.link.encode()).hexdigest()
+        self.is_complete = False

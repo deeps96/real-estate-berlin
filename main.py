@@ -20,11 +20,13 @@ CRAWLERS = [Howoge(), Gewobag(), Degewo(), Optima(), DeutscheWohnen(), StadtUndL
 
 def fetch_offers() -> List[Dict[str, Any]]:
     print('Fetching...')
-    return [
-        offer
-        for crawler in CRAWLERS
-        for offer in crawler.get_offer_link_list()
-    ]
+    offers = []
+    for crawler in CRAWLERS:
+        try:
+            offers.extend(crawler.get_offer_link_list())
+        except:
+            pass
+    return offers
 
 
 def is_interesting_offer(offer: Offer) -> bool:
@@ -32,23 +34,27 @@ def is_interesting_offer(offer: Offer) -> bool:
 
 
 if __name__ == '__main__':
+    offer_storage = OfferStorage()
+    bot = TelegramBot(offer_storage)
     offers = fetch_offers()
-    offer_storage = OfferStorage([
+    print(f'Found {str(offer_storage.get_size())} offers.')
+    offer_storage.add_offers([
         offer['offer']
         for offer in offers
     ])
-    print(f'Found {str(offer_storage.get_size())} offers.')
-    bot = TelegramBot(offer_storage)
     stats = Counter(offer['crawler'] for offer in offers)
     bot.send_stats(user_id, stats)
     try:
         while True:
             sleep(interval_in_seconds)
-            new_offers = [
-                offer['fetch']()
-                for offer in fetch_offers()
-                if not offer_storage.has_offer(offer['offer'].id)
-            ]
+            new_offers = []
+            for offer in fetch_offers():
+                if offer_storage.has_offer(offer['offer'].id):
+                    continue
+                try:
+                    new_offers.append(offer['fetch']())
+                except:
+                    offer_storage.add_offers(offer['offer'])
             if new_offers:
                 print(f'Found {len(new_offers)} new offers')
                 offer_storage.add_offers(new_offers)
