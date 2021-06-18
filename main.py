@@ -74,7 +74,10 @@ if __name__ == '__main__':
                 offer_storage.add_offers(new_offers)
                 for new_offer in new_offers:
                     if is_interesting_offer(new_offer):
-                        bot.send_offer(user_id, new_offer)
+                        try:
+                            bot.send_offer(user_id, new_offer)
+                        except:
+                            print(new_offer)
     finally:
         bot.stop()
         bot.send_shutdown_notice(user_id)
