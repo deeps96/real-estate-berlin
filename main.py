@@ -8,6 +8,7 @@ from crawlers.degewo import Degewo
 from crawlers.deutsche_wohnen import DeutscheWohnen
 from crawlers.foelske import Foelske
 from crawlers.gewobag import Gewobag
+from crawlers.habitare import Habitare
 from crawlers.howoge import Howoge
 from crawlers.milia import Milia
 from crawlers.optima import Optima
@@ -27,7 +28,8 @@ CRAWLERS = [
     Adler(),
     Westfalia(),
     Milia(),
-    Foelske()
+    Foelske(),
+    Habitare()
 ]
 
 
