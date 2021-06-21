@@ -20,7 +20,7 @@ class Foelske(Crawler):
             {
                 'fetch': lambda rel_link=link['href']: self.get_offer(urljoin(OFFER_LIST, rel_link)),
                 'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
-                'crawler': 'Milia'
+                'crawler': 'Foelske'
             }
             for link in browser.page.select('.result__list--element h3 > a')
         ]

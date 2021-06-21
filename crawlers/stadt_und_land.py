@@ -20,7 +20,7 @@ class StadtUndLand(Crawler):
             {
                 'fetch': lambda rel_link=link['href']: self.get_offer(urljoin(OFFER_LIST, rel_link)),
                 'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
-                'crawler': 'StadtUndLand'
+                'crawler': 'Stadt und Land'
             }
             for link in browser.links(link_text='weitere Informationen')
         ]
