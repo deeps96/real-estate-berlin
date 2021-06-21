@@ -16,7 +16,7 @@ class Optima(Crawler):
     def get_offer_link_list(self) -> List[Dict[str, Any]]:
         browser = create_browser()
         browser.open(OFFER_LIST)
-        return [
+        offers = [
             {
                 'fetch': lambda rel_link=link['href']: self.get_offer(urljoin(OFFER_LIST, rel_link)),
                 'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
@@ -24,11 +24,13 @@ class Optima(Crawler):
             }
             for link in browser.links(link_text='Alle Objektdetails')
         ]
+        browser.close()
+        return offers
 
     def get_offer(self, link: str) -> Offer:
         browser = create_browser()
         browser.open(link)
-        return Offer(
+        offer = Offer(
             address=get_address(browser.page),
             email=browser.page.select('a[href^=mailto\:]')[0]['href'][len('mailto:'):],
             images=[
@@ -44,6 +46,8 @@ class Optima(Crawler):
             size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche')).group()),
             title=browser.page.title.text
         )
+        browser.close()
+        return offer
 
 
 def get_address(page: BeautifulSoup) -> str:

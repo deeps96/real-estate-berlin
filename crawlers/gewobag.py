@@ -16,7 +16,7 @@ class Gewobag(Crawler):
     def get_offer_link_list(self) -> List[Dict[str, Any]]:
         browser = create_browser()
         browser.open(OFFER_LIST)
-        return [
+        offers = [
             {
                 'fetch': lambda rel_link=link['href']: self.get_offer(urljoin(OFFER_LIST, rel_link)),
                 'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
@@ -24,11 +24,13 @@ class Gewobag(Crawler):
             }
             for link in browser.page.find('div', class_='filtered-elements').find_all('a', text='Mietangebot ansehen')
         ]
+        browser.close()
+        return offers
 
     def get_offer(self, link: str) -> Offer:
         browser = create_browser()
         browser.open(link)
-        return Offer(
+        offer = Offer(
             address=extract_information_from_li_div(browser.page, 'Anschrift'),
             email=None,
             images=[
@@ -44,6 +46,9 @@ class Gewobag(Crawler):
             size=int(search('\d+', extract_information_from_li_div(browser.page, 'Fläche in m²')).group()),
             title=browser.page.title.text
         )
+        browser.close()
+        return offer
+
 
 
 def extract_information_from_li_div(page: BeautifulSoup, attribute: str) -> str:

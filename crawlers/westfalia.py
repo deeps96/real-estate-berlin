@@ -15,7 +15,7 @@ class Westfalia(Crawler):
     def get_offer_link_list(self) -> List[Dict[str, Any]]:
         browser = create_browser()
         browser.open(OFFER_LIST)
-        return [
+        offers = [
             {
                 'fetch': lambda absolute_link=link['href']: self.get_offer(absolute_link),
                 'offer': BaseOffer(link=link['href']),
@@ -23,11 +23,13 @@ class Westfalia(Crawler):
             }
             for link in browser.page.select("a[title='Zur Immobilie']")
         ]
+        browser.close()
+        return offers
 
     def get_offer(self, link: str) -> Offer:
         browser = create_browser()
         browser.open(link)
-        return Offer(
+        offer = Offer(
             address=f"{extract_information_from_table(browser.page, 'Straße:')}, {extract_information_from_table(browser.page, 'PLZ / Ort:')}",
             email=None,
             images=[
@@ -43,6 +45,8 @@ class Westfalia(Crawler):
             size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche:')).group()),
             title=browser.page.title.text
         )
+        browser.close()
+        return offer
 
 
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:

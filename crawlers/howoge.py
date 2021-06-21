@@ -34,7 +34,7 @@ class Howoge(Crawler):
     def get_offer(self, offer: Dict[str, Any]) -> Offer:
         browser = create_browser()
         browser.open(urljoin(BASE_URL, offer['link']))
-        return Offer(
+        offer = Offer(
             address=offer['title'],
             email=None,
             images=[
@@ -50,8 +50,6 @@ class Howoge(Crawler):
             size=int(offer['area']),
             title=offer['notice']
         )
+        browser.close()
+        return offer
 
-
-if __name__ == '__main__':
-    howoge = Howoge()
-    print(howoge.get_offer_link_list()[0]['fetch']())

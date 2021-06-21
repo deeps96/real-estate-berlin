@@ -16,7 +16,7 @@ class Habitare(Crawler):
     def get_offer_link_list(self) -> List[Dict[str, Any]]:
         browser = create_browser()
         browser.open(OFFER_LIST)
-        return [
+        offers = [
             {
                 'fetch': lambda rel_link=link['href']: self.get_offer(urljoin(OFFER_LIST, rel_link)),
                 'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
@@ -24,11 +24,13 @@ class Habitare(Crawler):
             }
             for link in browser.page.select('.result__list--element h3 > a')
         ]
+        browser.close()
+        return offers
 
     def get_offer(self, link: str) -> Offer:
         browser = create_browser()
         browser.open(link)
-        return Offer(
+        offer = Offer(
             address=browser.page.find('div', class_='expose--text__address').text,
             email=None,
             images=[
@@ -44,6 +46,8 @@ class Habitare(Crawler):
             size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche ca.:')).group()),
             title=browser.page.select('.is24__block__responsive--col1 .expose--text > h4')[0]
         )
+        browser.close()
+        return offer
 
 
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
