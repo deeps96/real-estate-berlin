@@ -2,8 +2,6 @@ from re import search
 from typing import List, Dict, Any
 from urllib.parse import urljoin
 
-from bs4 import BeautifulSoup
-
 from base_offer import BaseOffer
 from crawlers.crawler import Crawler, create_browser
 from offer import Offer
@@ -48,12 +46,3 @@ class Akelius(Crawler):
         )
         browser.close()
         return offer
-
-
-def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
-    table_rows = page.find_all('tr')
-    return next(
-        table_row.select('td:nth-child(2)')[0].text
-        for table_row in table_rows
-        if table_row.select('td:first-child') and table_row.select('td:first-child')[0].text == attribute
-    )

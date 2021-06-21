@@ -5,6 +5,7 @@ from typing import List, Dict, Any
 from config import user_id, interval_in_seconds
 from crawlers.adler import Adler
 from crawlers.akelius import Akelius
+from crawlers.buwog import Buwog
 from crawlers.degewo import Degewo
 from crawlers.deutsche_wohnen import DeutscheWohnen
 from crawlers.foelske import Foelske
@@ -31,7 +32,8 @@ CRAWLERS = [
     Milia(),
     Foelske(),
     Habitare(),
-    Akelius()
+    Akelius(),
+    Buwog()
 ]
 
 
