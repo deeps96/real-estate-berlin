@@ -16,6 +16,7 @@ from crawlers.habitare import Habitare
 from crawlers.howoge import Howoge
 from crawlers.milia import Milia
 from crawlers.optima import Optima
+from crawlers.rw_living import RWLiving
 from crawlers.stadt_und_land import StadtUndLand
 from crawlers.westfalia import Westfalia
 from offer import Offer
@@ -37,7 +38,8 @@ CRAWLERS = [
     Akelius(),
     Buwog(),
     GmiImmobilien(),
-    Biddex()
+    Biddex(),
+    RWLiving()
 ]
 
 
