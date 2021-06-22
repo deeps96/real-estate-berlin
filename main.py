@@ -86,7 +86,8 @@ if __name__ == '__main__':
                     if is_interesting_offer(new_offer):
                         try:
                             bot.send_offer(user_id, new_offer)
-                        except:
+                        except Exception as e:
+                            print(e)
                             print(new_offer)
     finally:
         bot.stop()
