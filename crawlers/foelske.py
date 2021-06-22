@@ -44,7 +44,7 @@ class Foelske(Crawler):
             },
             rooms=extract_information_from_table(browser.page, 'Zimmer:'),
             size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche ca.:')).group()),
-            title=browser.page.select('.is24__block__responsive--col1 .expose--text > h4')[0]
+            title=browser.page.select('.is24__block__responsive--col1 .expose--text > h4')[0].text
         )
         browser.close()
         return offer

@@ -8,10 +8,10 @@ from base_offer import BaseOffer
 from crawlers.crawler import Crawler, create_browser
 from offer import Offer
 
-OFFER_LIST = 'https://portal.immobilienscout24.de/ergebnisliste/25479099/1?sid=89llld3tht7l7u4ssnbu88q961'
+OFFER_LIST = 'https://portal.immobilienscout24.de/ergebnisliste/56717751/1?sid=k91qj44micigdp9srf0k53rsd6'
 
 
-class Milia(Crawler):
+class GmiImmobilien(Crawler):
 
     def get_offer_link_list(self) -> List[Dict[str, Any]]:
         browser = create_browser()
@@ -20,7 +20,7 @@ class Milia(Crawler):
             {
                 'fetch': lambda rel_link=link['href']: self.get_offer(urljoin(OFFER_LIST, rel_link)),
                 'offer': BaseOffer(link=urljoin(OFFER_LIST, link['href'])),
-                'crawler': 'Milia'
+                'crawler': 'GMI Immobilien'
             }
             for link in browser.page.select('.result__list--element h3 > a')
         ]
@@ -31,7 +31,7 @@ class Milia(Crawler):
         browser = create_browser()
         browser.open(link)
         offer = Offer(
-            address=browser.page.find('div', class_='expose--text__address').text,
+            address=browser.page.find('div', class_='expose--text__address').text.replace('\n', ''),
             email=None,
             images=[
                 urljoin(OFFER_LIST, img['src'][:img['src'].index('/ORIG')])
@@ -48,6 +48,7 @@ class Milia(Crawler):
         )
         browser.close()
         return offer
+
 
 
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
