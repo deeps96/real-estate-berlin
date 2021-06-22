@@ -11,6 +11,7 @@ from crawlers.degewo import Degewo
 from crawlers.deutsche_wohnen import DeutscheWohnen
 from crawlers.foelske import Foelske
 from crawlers.gewobag import Gewobag
+from crawlers.gewobe import Gewobe
 from crawlers.gmi_immobilien import GmiImmobilien
 from crawlers.habitare import Habitare
 from crawlers.howoge import Howoge
@@ -39,7 +40,8 @@ CRAWLERS = [
     Buwog(),
     GmiImmobilien(),
     Biddex(),
-    RWLiving()
+    RWLiving(),
+    Gewobe()
 ]
 
 
