@@ -34,8 +34,8 @@ class TelegramBot:
             callback_type = data[1]
             handlers[callback_type](update, query, data[2:], offer)
         else:
-            query.edit_message_text(
-                text='<b>Offer not loaded!</b>',
+            query.edit_message_caption(
+                caption='<b>Offer not loaded!</b>',
                 parse_mode=ParseMode.HTML
             )
 
