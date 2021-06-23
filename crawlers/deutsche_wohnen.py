@@ -36,7 +36,7 @@ class DeutscheWohnen(Crawler):
             address=f"{offer['address']['street']} {offer['address']['houseNumber']}, {offer['address']['zip']} {offer['address']['city']}",
             email=None,
             images=[
-                urljoin('https://www.deutsche-wohnen.com/', image['filePath'])
+                urljoin('https://immo-api.deutsche-wohnen.com/', image['filePath'])
                 for image in offer['images']
             ],
             link=f"https://www.deutsche-wohnen.com/expose/object/{offer['id']}",
