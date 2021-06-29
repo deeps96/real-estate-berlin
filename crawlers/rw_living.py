@@ -50,7 +50,6 @@ class RWLiving(Crawler):
         return offer
 
 
-
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
     table_rows = page.find_all('li')
     return next(

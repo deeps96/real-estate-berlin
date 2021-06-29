@@ -8,7 +8,7 @@ from base_offer import BaseOffer
 from crawlers.crawler import Crawler, create_browser
 from offer import Offer
 
-OFFER_LIST = 'https://www.adler-group.com/immobiliensuche/wohnung?geocodes=1276003001&livingspace=0&numberofrooms=1&page=1&price=1000&sortby=firstactivation'
+OFFER_LIST = 'https://www.adler-group.com/immobiliensuche/wohnung?geocodes=1276003001&livingspace=0&numberofrooms=1&page=10&price=1000&sortby=firstactivation'
 
 
 class Adler(Crawler):

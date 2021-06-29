@@ -6,7 +6,7 @@ from base_offer import BaseOffer
 from crawlers.crawler import Crawler, create_browser
 from offer import Offer
 
-OFFER_LIST = 'https://rent.akelius.com/de/search/germany/apartment/berlin?borough=friedrichshain,kreuzberg,mitte,prenzlauer%20berg,sch%C3%B6neberg&order=asc&sortby=lastPublishedDate'
+OFFER_LIST = 'https://rent.akelius.com/de/search/germany/apartment/berlin?borough=charlottenburg-wilmersdorf,friedrichshain,kreuzberg,mitte,prenzlauer%20berg,sch%C3%B6neberg,wei%C3%9Fensee&order=asc&sortby=lastPublishedDate'
 
 
 class Akelius(Crawler):
