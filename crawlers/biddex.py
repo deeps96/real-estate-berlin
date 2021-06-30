@@ -1,5 +1,6 @@
 from re import search
 from typing import List, Dict, Any
+from unicodedata import normalize
 from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
@@ -53,7 +54,7 @@ class Biddex(Crawler):
 def extract_address(page: BeautifulSoup) -> str:
     right_boxes = page.find_all('div', class_='right-box')
     return next(
-        right_box.find('p').text
+        normalize('NFKD', right_box.find('p').text)
         for right_box in right_boxes
         if right_box.find('h4', text='Addresse')
     )
@@ -62,8 +63,7 @@ def extract_address(page: BeautifulSoup) -> str:
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
     table_rows = page.find_all('tr')
     return next(
-        table_row.select('td:first-child span.pull-right')[0].text
+        normalize('NFKD', table_row.select('td:first-child span.pull-right')[0].text)
         for table_row in table_rows
         if table_row.select('td:first-child') and attribute in table_row.select('td:first-child')[0].find_all(text=True, recursive=False)[0]
     )
-
