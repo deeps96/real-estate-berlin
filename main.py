@@ -19,6 +19,7 @@ from crawlers.milia import Milia
 from crawlers.optima import Optima
 from crawlers.rw_living import RWLiving
 from crawlers.stadt_und_land import StadtUndLand
+from crawlers.wbm import WBM
 from crawlers.westfalia import Westfalia
 from offer import Offer
 from offer_storage import OfferStorage
@@ -41,7 +42,8 @@ CRAWLERS = [
     GmiImmobilien(),
     Biddex(),
     RWLiving(),
-    Gewobe()
+    Gewobe(),
+    WBM()
 ]
 
 
