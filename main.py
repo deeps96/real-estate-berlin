@@ -7,6 +7,7 @@ from crawlers.adler import Adler
 from crawlers.akelius import Akelius
 from crawlers.biddex import Biddex
 from crawlers.buwog import Buwog
+from crawlers.core_berlin import CoreBerlin
 from crawlers.degewo import Degewo
 from crawlers.deutsche_wohnen import DeutscheWohnen
 from crawlers.foelske import Foelske
@@ -43,7 +44,8 @@ CRAWLERS = [
     Biddex(),
     RWLiving(),
     Gewobe(),
-    WBM()
+    WBM(),
+    CoreBerlin()
 ]
 
 
