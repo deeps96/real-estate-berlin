@@ -50,7 +50,7 @@ class Degewo(Crawler):
             },
             rooms=extract_information_from_table(browser.page, 'Zimmer'),
             size=int(search('\d+', extract_information_from_table(browser.page, 'Wohnfläche')).group()),
-            title=browser.page.title.text
+            title=browser.page.select('h1.article__title')[0].text
         )
         browser.close()
         return offer
