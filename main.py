@@ -16,6 +16,7 @@ from crawlers.gewobe import Gewobe
 from crawlers.gmi_immobilien import GmiImmobilien
 from crawlers.habitare import Habitare
 from crawlers.howoge import Howoge
+from crawlers.living_in_berlin import LivingInBerlin
 from crawlers.milia import Milia
 from crawlers.optima import Optima
 from crawlers.rw_living import RWLiving
@@ -47,7 +48,8 @@ CRAWLERS = [
     Gewobe(),
     WBM(),
     CoreBerlin(),
-    Werneburg()
+    Werneburg(),
+    LivingInBerlin()
 ]
 
 
