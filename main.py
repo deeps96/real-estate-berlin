@@ -65,7 +65,7 @@ def fetch_offers() -> List[Dict[str, Any]]:
 
 
 def is_interesting_offer(offer: Offer) -> bool:
-    return (offer.zip.startswith('10') or offer.zip in ['12047', '12049', '12043', '12053']) and offer.rent['price'] < 1_000
+    return offer.rent['price'] < 1_000 and (offer.zip.startswith('10') or offer.zip in ['12047', '12049', '12043', '12053'])
 
 
 if __name__ == '__main__':
