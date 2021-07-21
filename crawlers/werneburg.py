@@ -35,8 +35,8 @@ class Werneburg(Crawler):
             address=extract_information_from_li_span(browser.page, 'Adresse').replace('\n', ' '),
             email=None,
             images=[
-                urljoin(OFFER_LIST, link['href'])
-                for link in browser.page.select('a.gallery__thumb')
+                urljoin(OFFER_LIST, img['src'])
+                for img in browser.page.select('.galleria-image img')
             ],
             link=link,
             rent={
