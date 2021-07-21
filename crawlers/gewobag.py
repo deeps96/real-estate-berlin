@@ -23,7 +23,7 @@ class Gewobag(Crawler):
                 'crawler': 'Gewobag'
             }
             for link in browser.page.find('div', class_='filtered-elements').find_all('a', text='Mietangebot ansehen')
-        ]
+        ] if browser.page.find('div', class_='filtered-elements') else []
         browser.close()
         return offers
 
