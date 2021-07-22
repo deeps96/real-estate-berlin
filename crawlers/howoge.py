@@ -18,7 +18,7 @@ class Howoge(Crawler):
             'tx_howsite_json_list[limit]': 100,
             'tx_howsite_json_list[lang]': 0,
             'tx_howsite_json_list[rent]': 1000,
-            'tx_howsite_json_list[area]': '',
+            'tx_howsite_json_list[area]': 40,
             'tx_howsite_json_list[rooms]': 'egal',
             'tx_howsite_json_list[wbs]': 'all-offers'
         })

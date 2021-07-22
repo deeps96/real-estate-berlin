@@ -8,7 +8,7 @@ from base_offer import BaseOffer
 from crawlers.crawler import Crawler, create_browser
 from offer import Offer
 
-OFFER_LIST = 'https://www.buwog-immobilientreuhand.de/de/property-search-result?property_search%5Btype%5D=rent&property_search%5Blimit%5D=10&property_search%5Blocation_rent%5D=city_1&property_search%5Blocation_buy%5D=&property_search%5Bproperty_type%5D=living&property_search%5Bmaximum_price%5D=1000&property_search%5Bminimum_number_of_rooms%5D=1&property_search%5Bmaximum_number_of_rooms%5D=0&property_search%5Bminimum_area%5D=20&property_search%5Bmaximum_area%5D=0&property_search%5Bbeing_built%5D=1&property_search%5Bexisting%5D=1&property_search%5Bcountry%5D=de&property_search%5Bsorting%5D=updatedAt%7CDESC'
+OFFER_LIST = 'https://www.buwog-immobilientreuhand.de/de/property-search-result?property_search%5Btype%5D=rent&property_search%5Blimit%5D=10&property_search%5Blocation_rent%5D=city_1&property_search%5Blocation_buy%5D=&property_search%5Bproperty_type%5D=living&property_search%5Bmaximum_price%5D=1000&property_search%5Bminimum_number_of_rooms%5D=1&property_search%5Bmaximum_number_of_rooms%5D=0&property_search%5Bminimum_area%5D=40&property_search%5Bmaximum_area%5D=0&property_search%5Bbeing_built%5D=1&property_search%5Bexisting%5D=1&property_search%5Bcountry%5D=de&property_search%5Bsorting%5D=updatedAt%7CDESC'
 
 
 class Buwog(Crawler):

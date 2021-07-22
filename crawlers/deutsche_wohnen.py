@@ -20,7 +20,8 @@ class DeutscheWohnen(Crawler):
             'utilizationType': 'flat',
             'price': '1000',
             'location': 'Berlin',
-            'city': 'Berlin'
+            'city': 'Berlin',
+            'area': '40'
         })
         return [
             {
