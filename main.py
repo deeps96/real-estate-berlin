@@ -5,6 +5,7 @@ from typing import List, Dict, Any
 from config import user_id, interval_in_seconds
 from crawlers.adler import Adler
 from crawlers.akelius import Akelius
+from crawlers.berlinovo import Berlinovo
 from crawlers.biddex import Biddex
 from crawlers.buwog import Buwog
 from crawlers.core_berlin import CoreBerlin
@@ -49,7 +50,8 @@ CRAWLERS = [
     WBM(),
     CoreBerlin(),
     Werneburg(),
-    LivingInBerlin()
+    LivingInBerlin(),
+    Berlinovo()
 ]
 
 
