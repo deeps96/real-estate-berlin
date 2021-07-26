@@ -22,6 +22,7 @@ from crawlers.milia import Milia
 from crawlers.optima import Optima
 from crawlers.rw_living import RWLiving
 from crawlers.stadt_und_land import StadtUndLand
+from crawlers.vonovia import Vonovia
 from crawlers.wbm import WBM
 from crawlers.werneburg import Werneburg
 from crawlers.westfalia import Westfalia
@@ -51,7 +52,8 @@ CRAWLERS = [
     CoreBerlin(),
     Werneburg(),
     LivingInBerlin(),
-    Berlinovo()
+    Berlinovo(),
+    Vonovia()
 ]
 
 
