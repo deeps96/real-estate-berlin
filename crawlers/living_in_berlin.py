@@ -57,4 +57,4 @@ def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
         dds[i_dt].text
         for i_dt, dt in enumerate(dts)
         if dt.text == attribute
-    ), default='NaN')
+    ), 'NaN')

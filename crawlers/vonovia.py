@@ -72,4 +72,4 @@ def extract_information_from_li(page: BeautifulSoup, attribute: str) -> str:
         li.select('span.value')[0].text
         for li in lis
         if li.select('span.label') and li.select('span.label')[0].text.strip() == attribute
-    ), default='NaN')
+    ), 'NaN')

@@ -57,4 +57,4 @@ def extract_information_from_li_div(page: BeautifulSoup, attribute: str) -> str:
         li.select('div:nth-child(2)')[0].text
         for li in lis
         if li.select('div:first-child') and li.select('div:first-child')[0].text == attribute
-    ), default='NaN')
+    ), 'NaN')

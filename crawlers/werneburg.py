@@ -57,4 +57,4 @@ def extract_information_from_li_span(page: BeautifulSoup, attribute: str) -> str
         row.select('div:nth-child(2)')[0].text
         for row in rows
         if row.select('div:first-child') and row.select('div:first-child')[0].text == attribute
-    ), default='NaN')
+    ), 'NaN')

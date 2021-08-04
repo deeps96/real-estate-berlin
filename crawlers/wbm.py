@@ -56,7 +56,7 @@ def extract_information_from_li_span(page: BeautifulSoup, attribute: str) -> str
         li.select('span:nth-child(2)')[0].text
         for li in lis
         if li.select('span:first-child') and li.select('span:first-child')[0].text == attribute
-    ), default='NaN')
+    ), 'NaN')
 
 
 def extract_information_from_li(page: BeautifulSoup, attribute: str) -> str:
@@ -65,4 +65,4 @@ def extract_information_from_li(page: BeautifulSoup, attribute: str) -> str:
         li.contents[2].replace(' ', '')
         for li in lis
         if li.select('span') and li.select('span')[0].text == attribute
-    ), default='NaN')
+    ), 'NaN')
