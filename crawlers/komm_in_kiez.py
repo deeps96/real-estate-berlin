@@ -40,7 +40,7 @@ class KommInKiez(Crawler):
             ],
             link=link,
             rent={
-                'price': int(prize_search.group()) if prize_search or 0,
+                'price': int(prize_search.group()) if prize_search else 0,
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Zimmer:'),
