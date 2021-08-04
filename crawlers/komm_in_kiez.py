@@ -30,6 +30,7 @@ class KommInKiez(Crawler):
     def get_offer(self, link: str) -> Offer:
         browser = create_browser()
         browser.open(link)
+        prize_search = search('\d+', extract_information_from_table(browser.page, 'Kaltmiete:'))
         offer = Offer(
             address=browser.page.find('div', class_='expose--text__address').text.replace('\n', ''),
             email=None,
@@ -39,7 +40,7 @@ class KommInKiez(Crawler):
             ],
             link=link,
             rent={
-                'price': int(search('\d+', extract_information_from_table(browser.page, 'Kaltmiete:')).group()),
+                'price': int(prize_search.group()) if prize_search or 0,
                 'total': True
             },
             rooms=extract_information_from_table(browser.page, 'Zimmer:'),
