@@ -52,9 +52,9 @@ class StadtUndLand(Crawler):
 
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
     table_rows = page.find_all('tr')
-    return next(
+    return next((
         table_row.select('td')[0].text
         for table_row in table_rows
         if table_row.select('th') and table_row.select('th')[0].text == attribute
-    )
+    ), default='NaN')
 

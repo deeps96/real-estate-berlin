@@ -53,8 +53,8 @@ class LivingInBerlin(Crawler):
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
     dts = page.find_all('dt')
     dds = page.find_all('dd')
-    return next(
+    return next((
         dds[i_dt].text
         for i_dt, dt in enumerate(dts)
         if dt.text == attribute
-    )
+    ), default='NaN')

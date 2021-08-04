@@ -52,9 +52,9 @@ class RWLiving(Crawler):
 
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
     table_rows = page.find_all('li')
-    return next(
+    return next((
         table_row.select('p:nth-child(2)')[0].text
         for table_row in table_rows
         if table_row.select('p:first-child') and table_row.select('p:first-child')[0].text == attribute
-    )
+    ), default='NaN')
 

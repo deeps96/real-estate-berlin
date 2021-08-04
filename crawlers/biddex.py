@@ -53,17 +53,17 @@ class Biddex(Crawler):
 
 def extract_address(page: BeautifulSoup) -> str:
     right_boxes = page.find_all('div', class_='right-box')
-    return next(
+    return next((
         normalize('NFKD', right_box.find('p').text)
         for right_box in right_boxes
         if right_box.find('h4', text='Addresse')
-    )
+    ), default='NaN')
 
 
 def extract_information_from_table(page: BeautifulSoup, attribute: str) -> str:
     table_rows = page.find_all('tr')
-    return next(
+    return next((
         normalize('NFKD', table_row.select('td:first-child span.pull-right')[0].text)
         for table_row in table_rows
         if table_row.select('td:first-child') and attribute in table_row.select('td:first-child')[0].find_all(text=True, recursive=False)[0]
-    )
+    ), default='NaN')
