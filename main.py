@@ -16,7 +16,7 @@ from crawlers.gewobag import Gewobag
 from crawlers.gewobe import Gewobe
 from crawlers.gmi_immobilien import GmiImmobilien
 from crawlers.habitare import Habitare
-from crawlers.howoge import Howoge
+from crawlers.komm_in_kiez import KommInKiez
 from crawlers.living_in_berlin import LivingInBerlin
 from crawlers.milia import Milia
 from crawlers.optima import Optima
@@ -31,7 +31,7 @@ from offer_storage import OfferStorage
 from telegram_bot import TelegramBot
 
 CRAWLERS = [
-    Howoge(),
+    # Howoge(),  # pretty useless offers
     Gewobag(),
     Degewo(),
     Optima(),
@@ -53,7 +53,8 @@ CRAWLERS = [
     Werneburg(),
     LivingInBerlin(),
     Berlinovo(),
-    Vonovia()
+    Vonovia(),
+    KommInKiez()
 ]
 
 
